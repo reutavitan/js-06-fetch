@@ -14,8 +14,16 @@
  * @param {number} postId
  * @returns {Promise} resolves after the result was printed (so whoever calls the function can wait for it)
  */
-function checkPostExists(postId) {
-  // write your code here
+async function checkPostExists(postId) {
+  try{
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`);
+    if (!response.ok) {
+      throw new Error("");
+    }
+    console.log("Post exists");
+  } catch (error) {
+    console.log("Post not found");
+  }
 }
 
 module.exports = { checkPostExists };

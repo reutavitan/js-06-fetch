@@ -14,8 +14,15 @@
  * @param {number} delay - milliseconds to wait before fetching
  * @returns {Promise} resolves after the result was printed (so whoever calls the function can wait for it)
  */
-function fetchWithDelay(url, delay) {
-  // write your code here
+async function fetchWithDelay(url, delay) {
+    await new Promise(resolve => {
+    setTimeout(resolve, delay);
+  });
+
+  const response = await fetch(url);
+
+  const data = await response.text();
+  console.log(`First 50 chars: ${data.slice(0, 50)}`);
 }
 
 module.exports = { fetchWithDelay };
